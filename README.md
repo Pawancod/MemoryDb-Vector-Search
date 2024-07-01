@@ -7,7 +7,6 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Components](#components)
-- [Running the Application](#running-the-application)
 
 
 ## Installation

@@ -50,7 +50,7 @@ func main() {
 	}
 	fmt.Println("Index created")
 
-	//-------------searching data via vector search ---
+	//-------searching data via vector search ------
 
 	//queryQuestion := "What is CCIE?"
 	reader := bufio.NewReader(os.Stdin)
