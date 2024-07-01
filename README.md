@@ -1,6 +1,9 @@
 # MemoryDb-Vector-Search
 
 This project demonstrates how to perform vector search using AWS MemoryDB for Redis. The application stores questions and answers (Q&A) pairs along with their vector representations in Redis and retrieves the most relevant answer based on a user's query using vector similarity search.
+Note : 
+1.Though i have done the code to be run on local, note that memoryDb can be used internally only , Extenal access is discouraged by AWS  i.e. this can only be run on machine like EC2 on the VPC.
+2.Code only demostrate the flow and logics for vector search
 
 ## Table of Contents
 - [Installation](#installation)
