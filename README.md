@@ -29,9 +29,9 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
    - Ensure the vectorization service is running(using this since for generating vectors from an 3rd party api are paid, can be replaced with openAI/huggin face API for vector generation):
    - Run the following command to get vectorization service up in python
       ```sh
-    python3 -m venv venv
-    source venv/bin/activate
-     ``` 
+      python3 -m venv venv
+      source venv/bin/activate
+    
      ```sh
      python vectorization_service/main.py
      ```
