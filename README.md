@@ -40,9 +40,9 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
 
 ## Steps to make this work 
   - Make the Redis instance available by setting up the cluster endpoint.
-  - Add questions and answers in the `model/qa.go` file to store them in Redis using `StoreQAPair`.
-  - Lines 34 to 51 contain the logic for storing the question/answer pairs.
-  - Lines 53 to 66 contain the logic for performing vector search.
+  - Add questions and answers in the `model/qa.go` file to store them in Redis using `StoreQAPair` .
+  - Lines 34 to 51 contain the logic for storing the question/answer pairs(main.go).
+  - Lines 53 to 66 contain the logic for performing vector search(main.go).
   - You can update the query question to test.
 
 

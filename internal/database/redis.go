@@ -33,7 +33,7 @@ func CreateIndex(ctx context.Context, rdb *redis.Client) error {
 	return err
 }
 
-// Helper function to convert a slice of floats to a space-separated string
+// Function for converting a slice of floats to a space-separated string
 func floatsToString(floats []float64) string {
 	strs := make([]string, len(floats))
 	for i, f := range floats {
