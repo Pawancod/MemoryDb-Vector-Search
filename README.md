@@ -27,9 +27,11 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
 
 2. **Run the vectorization service:**
    - Ensure the vectorization service is running(using this since for generating vectors from an 3rd party api are paid, can be replaced with openAI/huggin face API for vector generation):
-    Run the following command to get vectorization service up in python
-      python3 -m venv venv                   
-      source venv/bin/activate 
+   - Run the following command to get vectorization service up in python
+      ```sh
+    python3 -m venv venv
+    source venv/bin/activate
+     ``` 
      ```sh
      python vectorization_service/main.py
      ```
@@ -39,11 +41,12 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
    go run main.go
 
 ## Steps to make this work 
-   --> make the redis up by having cluster endpoint
-   --> Add question/answers in qa.model file to store the question and answers in redis by using  in `StoreQAPair`
-   --> from line 34 to 51 , there exist logic to store the question/answer
-   --> from line 53 to 66  ther exist the logic to perfomr vector search
-   --> one can update the query question to test 
+  - Make the Redis instance available by setting up the cluster endpoint.
+  - Add questions and answers in the `model/qa.go` file to store them in Redis using `StoreQAPair`.
+  - Lines 34 to 51 contain the logic for storing the question/answer pairs.
+  - Lines 53 to 66 contain the logic for performing vector search.
+  - You can update the query question to test.
+
 
 
 
