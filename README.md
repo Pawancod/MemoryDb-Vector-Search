@@ -31,10 +31,8 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
       ```sh
       python3 -m venv venv
       source venv/bin/activate
-    
-     ```sh
-     python vectorization_service/main.py
-     ```
+      python vectorization_service/main.py
+
 
 3. **Run the Go application:**
    ```sh
