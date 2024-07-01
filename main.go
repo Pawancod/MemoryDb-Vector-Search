@@ -30,6 +30,8 @@ func main() {
 	// Defining Q&A pairs
 	qaPairs := model.GetQAPairs(ctx)
 
+
+	//-------------- storing data -------------
 	// Storing each Q&A pair in Redis
 	for i, qa := range qaPairs {
 		err := database.StoreQAPair(ctx, rdb, i+1, qa)
@@ -48,7 +50,8 @@ func main() {
 	}
 	fmt.Println("Index created")
 
-	// Performing vector search
+	//-------------searching data via vector search ---
+
 	//queryQuestion := "What is CCIE?"
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter a question to search for: ")
