@@ -31,8 +31,9 @@ func main() {
 	qaPairs := model.GetQAPairs(ctx)
 
 
-	//-------------- storing data -------------
-	// Storing each Q&A pair in Redis
+	//-------------- storing data -------------//
+
+	// Storing data
 	for i, qa := range qaPairs {
 		err := database.StoreQAPair(ctx, rdb, i+1, qa)
 		if err != nil {
@@ -42,7 +43,7 @@ func main() {
 		fmt.Printf("Stored Q&A pair: qa:%d\n", i+1)
 	}
 
-	// Creating index for vector search to have similar answers
+	// Creating index for vector search
 	err = database.CreateIndex(ctx, rdb)
 	if err != nil {
 		fmt.Println("Error creating index:", err)
@@ -50,7 +51,8 @@ func main() {
 	}
 	fmt.Println("Index created")
 
-	//-------searching data via vector search ------
+
+	//-------------- searching data-----------//
 
 	//queryQuestion := "What is CCIE?"
 	reader := bufio.NewReader(os.Stdin)
