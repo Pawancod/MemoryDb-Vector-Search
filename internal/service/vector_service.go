@@ -16,12 +16,23 @@ func PerformVectorSearch(ctx context.Context, rdb *redis.Client, queryQuestion s
 	if err != nil {
 		return "", err
 	}
+
+	if len(queryVector) != 3 {
+		return "", fmt.Errorf("query vector has incorrect dimensions: %d", len(queryVector))
+	}
+
 	queryVectorString := floatsToString(queryVector)
+	fmt.Printf("Query vector: %s\n", queryVectorString)
 
 	// Perform a vector search
 	queryResult, err := rdb.Do(ctx, "FT.SEARCH", "idx:qa", "*=>[KNN 1 @vector $vec AS score]", "PARAMS", "2", "vec", queryVectorString, "SORTBY", "score", "ASC").Result()
 	if err != nil {
 		return "", err
+	}
+
+	results := queryResult.([]interface{})
+	if len(results) < 2 {
+		return "", fmt.Errorf("no results found")
 	}
 
 	// Extract the answer from the search result
@@ -49,6 +60,8 @@ func GenerateVector(ctx context.Context, question string) ([]float64, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error decoding response: %v", err)
 	}
+	vector := result["vector"]
+	fmt.Printf("Generated vector: %v\n", vector)
 	return result["vector"], nil
 }
 
