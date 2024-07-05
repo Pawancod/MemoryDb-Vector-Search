@@ -13,7 +13,6 @@ import (
 )
 
 func main() {
-
 	ctx := context.Background()
 
 	// Initializing Redis client
@@ -30,10 +29,7 @@ func main() {
 	// Defining Q&A pairs
 	qaPairs := model.GetQAPairs(ctx)
 
-
-	//-------------- storing data -------------//
-
-	// Storing data
+	//--------Storing data and Indexing-----//
 	for i, qa := range qaPairs {
 		err := database.StoreQAPair(ctx, rdb, i+1, qa)
 		if err != nil {
@@ -52,18 +48,39 @@ func main() {
 	fmt.Println("Index created")
 
 
-	//-------------- searching data-----------//
-
-	//queryQuestion := "What is CCIE?"
+	//--------Searching: Vector search-----//
+	
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter a question to search for: ")
-	queryQuestion, _ := reader.ReadString('\n')
-	queryQuestion = strings.TrimSpace(queryQuestion)
+	defer func() {
+		// Cleanup before exit
+		fmt.Println("Flushing MemoryDB...")
+		err := rdb.FlushAll(ctx).Err()
+		if err != nil {
+			fmt.Println("Error flushing MemoryDB:", err)
+		}
+		fmt.Println("MemoryDB flushed. Exiting...")
+	}()
 
-	answer, err := service.PerformVectorSearch(ctx, rdb, queryQuestion)
-	if err != nil {
-		fmt.Println("Error performing vector search:", err)
-		os.Exit(1)
+	for {
+		
+		fmt.Print("Enter a question to search for (type 'exit' to quit): ")
+		queryQuestion, _ := reader.ReadString('\n')
+		queryQuestion = strings.TrimSpace(queryQuestion)
+
+		
+		if queryQuestion == "exit" {
+			break
+		}
+
+		
+		answer, err := service.PerformVectorSearch(ctx, rdb, queryQuestion)
+		if err != nil {
+			fmt.Println("Error performing vector search:", err)
+			continue // Continue to prompt for next question
+		}
+
+		fmt.Println("Answer:", answer)
 	}
-	fmt.Println("Answer:", answer)
+
+	fmt.Println("Program exited.")
 }
