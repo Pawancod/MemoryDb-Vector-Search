@@ -29,13 +29,14 @@ func main() {
 	// Defining Q&A pairs
 	qaPairs := model.GetQAPairs(ctx)
 
+
 	//--------Storing data and Indexing-----//
 	for i, qa := range qaPairs {
 		err := database.StoreQAPair(ctx, rdb, i+1, qa)
 		if err != nil {
 			fmt.Println("Error storing Q&A pair:", err)
 			os.Exit(1)
-		}
+		}.
 		fmt.Printf("Stored Q&A pair: qa:%d\n", i+1)
 	}
 
@@ -49,7 +50,6 @@ func main() {
 
 
 	//--------Searching: Vector search-----//
-	
 	reader := bufio.NewReader(os.Stdin)
 	defer func() {
 		// Cleanup before exit
@@ -67,12 +67,10 @@ func main() {
 		queryQuestion, _ := reader.ReadString('\n')
 		queryQuestion = strings.TrimSpace(queryQuestion)
 
-		
 		if queryQuestion == "exit" {
 			break
 		}
 
-		
 		answer, err := service.PerformVectorSearch(ctx, rdb, queryQuestion)
 		if err != nil {
 			fmt.Println("Error performing vector search:", err)
