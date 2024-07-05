@@ -2,8 +2,10 @@
 
 This project demonstrates how to perform vector search using AWS MemoryDB for Redis. The application stores questions and answers (Q&A) pairs along with their vector representations in Redis and retrieves the most relevant answer based on a user's query using vector similarity search.
 
+
 **Note:**
 - **Local Environment:** (can only be done via VPN on local)The code only serves the flow and Logic behind the vector search . However, AWS MemoryDB can only be accessed internally; external access is discouraged by AWS. Therefore, this setup should be deployed on machines like EC2 within the VPC with fine changes .
+- **Note:** MemoryDB with vector earch is in preview state and is only present in some regions g us-east-1, make sure we have everything setup in the availability zone only
 - **Purpose:** The code serves as a demonstration of the flow and logic for vector search.
 
 
@@ -31,7 +33,8 @@ This project demonstrates how to perform vector search using AWS MemoryDB for Re
 
 2. **Run the vectorization service:**
    - Ensure the vectorization service is running(using this since for generating vectors from an 3rd party api are paid, can be replaced with openAI/huggin face API for vector generation):
-   - Run the following command to get vectorization service up in python
+   - Install python dependencies- present in vectorization_service/requirements.txt
+   - Run the following command in the dorectory to get vectorization service up in python
       ```sh
       python3 -m venv venv
       source venv/bin/activate

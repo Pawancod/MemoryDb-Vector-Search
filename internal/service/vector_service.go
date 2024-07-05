@@ -16,10 +16,10 @@ func PerformVectorSearch(ctx context.Context, rdb *redis.Client, queryQuestion s
 	if err != nil {
 		return "", err
 	}
-
-	if len(queryVector) != 3 {
+	
+	if len(queryVector) != 384 {
 		return "", fmt.Errorf("query vector has incorrect dimensions: %d", len(queryVector))
-	}
+    }
 
 	queryVectorString := floatsToString(queryVector)
 	fmt.Printf("Query vector: %s\n", queryVectorString)
@@ -60,6 +60,7 @@ func GenerateVector(ctx context.Context, question string) ([]float64, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error decoding response: %v", err)
 	}
+
 	vector := result["vector"]
 	fmt.Printf("Generated vector: %v\n", vector)
 	return result["vector"], nil
