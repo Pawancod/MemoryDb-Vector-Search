@@ -36,7 +36,7 @@ func main() {
 		if err != nil {
 			fmt.Println("Error storing Q&A pair:", err)
 			os.Exit(1)
-		}.
+		}
 		fmt.Printf("Stored Q&A pair: qa:%d\n", i+1)
 	}
 
