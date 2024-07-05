@@ -29,7 +29,7 @@ func StoreQAPair(ctx context.Context, rdb *redis.Client, id int, qa model.QAPair
 }
 
 func CreateIndex(ctx context.Context, rdb *redis.Client) error {
-	_, err := rdb.Do(ctx, "FT.CREATE", "idx:qa", "ON", "HASH", "PREFIX", "1", "qa:", "SCHEMA", "vector", "VECTOR", "HNSW", "6", "TYPE", "FLOAT32", "DIM", "3", "DISTANCE_METRIC", "COSINE").Result()
+	_, err := rdb.Do(ctx, "FT.CREATE", "idx:qa", "ON", "HASH", "PREFIX", "1", "qa:", "SCHEMA", "vector", "VECTOR", "HNSW", "6", "TYPE", "FLOAT32", "DIM", "384", "DISTANCE_METRIC", "COSINE").Result()
 	return err
 }
 
