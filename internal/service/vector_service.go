@@ -70,7 +70,10 @@ func GenerateVector(ctx context.Context, question string) ([]float64, error) {
 func floatsToString(floats []float64) string {
 	strs := make([]string, len(floats))
 	for i, f := range floats {
-		strs[i] = fmt.Sprintf("%f", f)
-	}
+	// Convert float64 to float32
+	f32 := float32(f)
+	// Format as string with %f for float32
+	strs[i] = fmt.Sprintf("%f", f32)
+}
 	return strings.Join(strs, " ")
 }
