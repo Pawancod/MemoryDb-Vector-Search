@@ -22,7 +22,7 @@ func PerformVectorSearch(ctx context.Context, rdb *redis.Client, queryQuestion s
     }
 
 	queryVectorString := floatsToString(queryVector)
-	fmt.Printf("Query vector: %s\n", queryVectorString)
+	//fmt.Printf("Query vector: %s\n", queryVectorString)
 
 	// Perform a vector search
 	queryResult, err := rdb.Do(ctx, "FT.SEARCH", "idx:qa", "*=>[KNN 1 @vector $vec AS score]", "PARAMS", "2", "vec", queryVectorString, "SORTBY", "score", "ASC").Result()
@@ -62,7 +62,7 @@ func GenerateVector(ctx context.Context, question string) ([]float64, error) {
 	}
 
 	vector := result["vector"]
-	fmt.Printf("Generated vector: %v\n", vector)
+	//fmt.Printf("Generated vector: %v\n", vector)
 	return result["vector"], nil
 }
 
